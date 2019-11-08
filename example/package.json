@@ -12,6 +12,7 @@
   "dependencies": {
     "react": "16.9.0",
     "react-native": "0.61.4",
+    "react-native-autotrack-growingio": "^0.0.6",
     "react-native-growing-touch": "file:./../react-native-growing-touch"
   },
   "devDependencies": {
