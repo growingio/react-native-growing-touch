@@ -5,13 +5,14 @@ import android.content.Context;
 
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
-import com.growingio.android.plugin.rn.GrowingIOPackage;
-import com.growingio.android.sdk.collection.Configuration;
-import com.growingio.android.sdk.collection.GrowingIO;
-import com.growingio.android.sdk.gtouch.rn.RNGrowingTouchPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
+import com.growingio.android.plugin.rn.GrowingIOPackage;
+import com.growingio.android.sdk.collection.Configuration;
+import com.growingio.android.sdk.collection.GrowingIO;
+import com.growingio.android.sdk.gtouch.GrowingTouch;
+import com.growingio.android.sdk.gtouch.config.GTouchConfig;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
@@ -54,6 +55,11 @@ public class MainApplication extends Application implements ReactApplication {
         GrowingIO.startWithConfiguration(this, new Configuration()
                 .setTestMode(true)
                 .setDebugMode(true));
+
+        GrowingTouch.startWithConfig(this, new GTouchConfig()
+                .setDebugEnable(true)
+                .setEventPopupEnable(false)
+                .setUploadExceptionEnable(false));
     }
 
     /**

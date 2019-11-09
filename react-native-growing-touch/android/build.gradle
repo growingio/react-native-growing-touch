@@ -1,4 +1,3 @@
-
 buildscript {
     repositories {
         mavenLocal()
@@ -35,5 +34,7 @@ repositories {
 
 dependencies {
     implementation 'com.facebook.react:react-native:+'
+    compileOnly "com.growingio.android:vds-android-agent:track-2.8.4@aar"
+    compileOnly 'com.growingio.android:gtouch:1.0.0'
 }
 

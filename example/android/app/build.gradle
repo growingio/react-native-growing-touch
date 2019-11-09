@@ -195,6 +195,7 @@ dependencies {
     }
 
     implementation 'com.growingio.android:vds-android-agent:RN-track-2.8.5@aar'
+    implementation 'com.growingio.android:gtouch:1.0.0'
 
 }
 

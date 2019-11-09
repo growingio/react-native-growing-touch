@@ -8,10 +8,34 @@ import {
   NativeModules,
 } from 'react-native';
 
+import GrowingTouch from 'react-native-growing-touch'
+
 export default class RNApp extends Component {
+  static first = false;
+
   state = {
-    isEnable: false,
+    isEnable: true,
   };
+
+  async componentDidMount(): void {
+    if (this.first === true) {
+      return;
+    }
+    this.first = true;
+    let enable = await GrowingTouch.isEventPopupEnabled();
+    console.log('RNApp isEventPopupEnabled = ' + enable);
+    if (!enable) {
+      GrowingTouch.enableEventPopupAndGenerateAppOpenEvent();
+      GrowingTouch.setEventPopupListener({
+        onLoadSuccess: (eventId, eventType) => {
+          console.log('RNApp onLoadSuccess: eventId = ' + eventId + ', eventType = ' + eventType);
+        },
+        onClicked: (eventId, eventType, openUrl) => {
+          console.log('RNApp onClicked: eventId = ' + eventId + ', eventType = ' + eventType + ', openUrl = ' + openUrl);
+        },
+      });
+    }
+  }
 
   render() {
     return (
@@ -30,6 +54,7 @@ export default class RNApp extends Component {
               this.setState({
                 isEnable: value,
               });
+              GrowingTouch.setEventPopupEnable(value);
             }}
           />
         </View>
@@ -37,7 +62,6 @@ export default class RNApp extends Component {
           <Button
             title="触发一个埋点事件"
             onPress={event => {
-              console.log('xxxx ' + event);
               NativeModules.GrowingIO.track('touch1', {});
             }}
           />
@@ -46,7 +70,7 @@ export default class RNApp extends Component {
           <Button
             title="打开一个页面"
             onPress={event => {
-              console.log('xxxx ' + event);
+
             }}
           />
         </View>
@@ -54,7 +78,24 @@ export default class RNApp extends Component {
           <Button
             title="注册弹窗监听"
             onPress={event => {
-              console.log('xxxx ' + event);
+              console.log('注册弹窗监听');
+              GrowingTouch.setEventPopupListener({
+                onLoadSuccess: (eventId, eventType) => {
+                  console.log('RNApp onLoadSuccess: eventId = ' + eventId + ', eventType = ' + eventType);
+                },
+                onLoadFailed: (eventId, eventType, errorCode, description) => {
+                  console.log('RNApp onLoadFailed: eventId = ' + eventId + ', eventType = ' + eventType + ', errorCode = ' + errorCode + ', description = ' + description);
+                },
+                onClicked: (eventId, eventType, openUrl) => {
+                  console.log('RNApp onClicked: eventId = ' + eventId + ', eventType = ' + eventType + ', openUrl = ' + openUrl);
+                },
+                onCancel: (eventId, eventType) => {
+                  console.log('RNApp onCancel: eventId = ' + eventId + ', eventType = ' + eventType);
+                },
+                onTimeout: (eventId, eventType) => {
+                  console.log('RNApp onTimeout: eventId = ' + eventId + ', eventType = ' + eventType);
+                },
+              });
             }}
           />
         </View>
@@ -62,7 +103,8 @@ export default class RNApp extends Component {
           <Button
             title="注销弹窗监听"
             onPress={event => {
-              console.log('xxxx ' + event);
+              console.log('注销弹窗监听');
+              GrowingTouch.setEventPopupListener(null);
             }}
           />
         </View>
