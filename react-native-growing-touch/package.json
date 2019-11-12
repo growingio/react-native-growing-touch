@@ -3,12 +3,14 @@
   "name": "react-native-growing-touch",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "GrowingTouch.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "react-native"
+    "react-native",
+    "GrowingIO",
+    "GrowingTouch"
   ],
   "author": "",
   "license": "",
