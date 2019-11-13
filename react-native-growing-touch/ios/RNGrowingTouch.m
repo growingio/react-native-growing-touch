@@ -1,14 +1,14 @@
 
 #import "RNGrowingTouch.h"
-#import <GrowingTouchKit/GrowingTouch.h>
-#import <GrowingTouchKit/GrowingTouchEventPopupDelegate.h>
 
-@interface RNGrowingTouch () <GrowingTouchEventPopupDelegate>
+static NSString *const GTouchEventReminder = @"GTouchEventReminder";
+static NSString *const GrowingTouchClass = @"GrowingTouch";
+
+@interface RNGrowingTouch ()
 @property(nonatomic, assign) bool hasListeners;
 @end
 
 @implementation RNGrowingTouch
-static NSString *const GTouchEventReminder = @"GTouchEventReminder";
 
 - (dispatch_queue_t)methodQueue {
     return dispatch_get_main_queue();
@@ -18,13 +18,28 @@ RCT_EXPORT_MODULE();
 
 RCT_EXPORT_METHOD(setEventPopupEnable:(BOOL) enable) {
     NSLog(@"RNGrowingTouch setEventPopupEnable: enable = %d", enable);
-    [GrowingTouch setEventPopupEnable:enable];
+    Class clazz = NSClassFromString(GrowingTouchClass);
+    BOOL responds = [clazz respondsToSelector:@selector(setEventPopupEnable:)];
+    
+    if (!clazz || !responds) {
+        NSLog(@"RNGrowingTouch do not found GrowingTouch");
+        return;
+    }
+    [clazz performSelector:@selector(setEventPopupEnable:) withObject:@(enable)];
 }
 
 RCT_REMAP_METHOD(isEventPopupEnabled,
                  isEventPopupEnabledWithResolver:(RCTPromiseResolveBlock) resolve
                  rejecter:(RCTPromiseRejectBlock) reject) {
-    bool enable = [GrowingTouch isEventPopupEnabled];
+    Class clazz = NSClassFromString(GrowingTouchClass);
+    BOOL responds = [clazz respondsToSelector:@selector(isEventPopupEnabled)];
+    
+    if (!clazz || !responds) {
+        NSLog(@"RNGrowingTouch do not found GrowingTouch");
+        return;
+    }
+    bool enable = [clazz performSelector:@selector(isEventPopupEnabled)];
+
     NSLog(@"RNGrowingTouch isEventPopupEnabled: enable = %d", enable);
     NSDictionary *data = @{@"popupEnabled": @(enable)};
     resolve(data);
@@ -32,21 +47,44 @@ RCT_REMAP_METHOD(isEventPopupEnabled,
 
 RCT_EXPORT_METHOD(enableEventPopupAndGenerateAppOpenEvent) {
     NSLog(@"RNGrowingTouch enableEventPopupAndGenerateAppOpenEvent");
-    [GrowingTouch enableEventPopupAndGenerateAppOpenEvent];
+    Class clazz = NSClassFromString(GrowingTouchClass);
+    BOOL responds = [clazz respondsToSelector:@selector(enableEventPopupAndGenerateAppOpenEvent)];
+    
+    if (!clazz || !responds) {
+        NSLog(@"RNGrowingTouch do not found GrowingTouch");
+        return;
+    }
+    
+    [clazz performSelector:@selector(enableEventPopupAndGenerateAppOpenEvent)];
 }
 
 RCT_REMAP_METHOD(isEventPopupShowing,
                  isEventPopupShowingWithResolver:(RCTPromiseResolveBlock) resolve
                  rejecter:(RCTPromiseRejectBlock) reject) {
-    bool isShowing = [GrowingTouch isEventPopupShowing];
-    NSLog(@"RNGrowingTouch isEventPopupShowing: enable = %d", isShowing);
+    Class clazz = NSClassFromString(GrowingTouchClass);
+    BOOL responds = [clazz respondsToSelector:@selector(isEventPopupShowing)];
+    
+    if (!clazz || !responds) {
+        NSLog(@"RNGrowingTouch do not found GrowingTouch");
+        return;
+    }
+    bool isShowing = [clazz performSelector:@selector(isEventPopupShowing)];
+    
+    NSLog(@"RNGrowingTouch isEventPopupShowing: isShowing = %d", isShowing);
     NSDictionary *data = @{@"popupShowing": @(isShowing)};
     resolve(data);
 }
 
 RCT_EXPORT_METHOD(setEventPopupListener) {
     NSLog(@"RNGrowingTouch setEventPopupListener");
-    [GrowingTouch setEventPopupDelegate:self];
+    Class clazz = NSClassFromString(GrowingTouchClass);
+    BOOL responds = [clazz respondsToSelector:@selector(setEventPopupDelegate:)];
+    
+    if (!clazz || !responds) {
+        NSLog(@"RNGrowingTouch do not found GrowingTouch");
+        return;
+    }
+    [clazz performSelector:@selector(setEventPopupDelegate:) withObject:self];
 }
 
 - (NSArray<NSString *> *)supportedEvents {
