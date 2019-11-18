@@ -8,7 +8,12 @@ import {
   NativeModules,
 } from 'react-native';
 
-import GrowingTouch from 'react-native-growing-touch'
+
+// 开发依赖
+import GrowingTouch from './GrowingTouch'
+
+// 线上依赖
+// import GrowingTouch from 'react-native-growing-touch'
 
 export default class RNApp extends Component {
   static first = false;

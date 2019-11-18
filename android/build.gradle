@@ -1,38 +1,40 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-
 buildscript {
-    ext {
-        minSdkVersion = 17
-        compileSdkVersion = 28
-        targetSdkVersion = 28
-    }
     repositories {
         mavenLocal()
         google()
         jcenter()
     }
+
     dependencies {
-        classpath("com.android.tools.build:gradle:3.4.2")
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        classpath 'com.android.tools.build:gradle:3.4.2'
     }
 }
 
-allprojects {
-    repositories {
-        mavenLocal()
-        maven {
-            // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
-            url("$rootDir/../node_modules/react-native/android")
-        }
-        maven {
-            // Android JSC is installed from npm
-            url("$rootDir/../node_modules/jsc-android/dist")
-        }
+apply plugin: 'com.android.library'
 
-        google()
-        jcenter()
-        maven { url 'https://jitpack.io' }
+android {
+    compileSdkVersion 28
+
+    defaultConfig {
+        minSdkVersion 17
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+    }
+    lintOptions {
+        abortOnError false
     }
 }
+
+repositories {
+    mavenLocal()
+    google()
+    jcenter()
+}
+
+dependencies {
+    implementation 'com.facebook.react:react-native:+'
+    compileOnly "com.growingio.android:vds-android-agent:track-2.8.4@aar"
+    compileOnly 'com.growingio.android:gtouch:1.0.0'
+}
+
