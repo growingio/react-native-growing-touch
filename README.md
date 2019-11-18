@@ -37,9 +37,8 @@
 
 ## Usage
 ```javascript
-import RNGrowingTouch from 'react-native-growing-touch';
+import GrowingTouch from 'react-native-growing-touch';
 
 // TODO: What to do with the module?
-RNGrowingTouch;
+GrowingTouch;
 ```
-  

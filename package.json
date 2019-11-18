@@ -1,8 +1,8 @@
 
 {
   "name": "react-native-growing-touch",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.0-beta",
+  "description": "Growing Touch for React Native",
   "main": "GrowingTouch.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
