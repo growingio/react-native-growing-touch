@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "RNGrowingTouch"
-  s.version      = "0.0.1-beta"
+  s.version      = "0.0.2"
   s.summary      = "RNGrowingTouch"
   s.description  = <<-DESC
                   This Pod contains GrowingIO SDK -- RNGrowingTouch. For more informations, please read http://help.growingio.com/ (in Chinese).
