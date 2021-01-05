@@ -156,5 +156,17 @@ RCT_EXPORT_METHOD(setEventPopupListener) {
                                                            @"eventType": eventType}];
     }
 }
+/**
+ * 触达弹窗消费时（待展示时）
+ * @param popup 待展示的弹窗数据
+ *
+ * @param action 弹窗绑定的操作行为
+ *
+ * @return true：自定义展示该弹窗，触达SDK不在处理；false：由触达来展示该弹窗，
+ * @discussion 在 popup.rule.target 数据中可以取出配置的 target 数据，比如一张图片的链接或其他参数，进行自定义的弹窗展示
+ */
+- (BOOL)popupEventDecideShowPopupView:(GrowingPopupWindowEvent *)popup decisionAction:(GrowingEventPopupDecisionAction *)action {
+    return NO;
+}
 @end
 

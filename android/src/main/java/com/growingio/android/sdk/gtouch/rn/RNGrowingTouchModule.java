@@ -145,6 +145,12 @@ public class RNGrowingTouchModule extends ReactContextBaseJavaModule {
             data.putString("eventType", eventType);
             mEventEmitter.emit(GTOUCH_EVENT_REMINDER, data);
         }
+        
+        @Override
+        public boolean popupEventDecideShow(PopupWindowEvent popupWindowEvent, EventPopupDecisionAction eventPopupDecisionAction) {
+
+            return false;
+        }
     }
 
 }
