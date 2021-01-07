@@ -15,6 +15,8 @@ import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.growingio.android.sdk.common.log.Logger;
 import com.growingio.android.sdk.gtouch.GTouchManager;
 import com.growingio.android.sdk.gtouch.GrowingTouch;
+import com.growingio.android.sdk.gtouch.data.entity.PopupWindowEvent;
+import com.growingio.android.sdk.gtouch.event.EventPopupDecisionAction;
 import com.growingio.android.sdk.gtouch.listener.EventPopupListener;
 
 public class RNGrowingTouchModule extends ReactContextBaseJavaModule {
@@ -144,6 +146,11 @@ public class RNGrowingTouchModule extends ReactContextBaseJavaModule {
             data.putString("eventId", eventId);
             data.putString("eventType", eventType);
             mEventEmitter.emit(GTOUCH_EVENT_REMINDER, data);
+        }
+
+        @Override
+        public boolean popupEventDecideShow(PopupWindowEvent popupWindowEvent, EventPopupDecisionAction eventPopupDecisionAction) {
+            return false;
         }
     }
 

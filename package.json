@@ -1,7 +1,7 @@
 
 {
   "name": "react-native-growing-touch",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Growing Touch for React Native",
   "main": "GrowingTouch.js",
   "scripts": {
